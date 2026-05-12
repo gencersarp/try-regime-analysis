@@ -1,0 +1,34 @@
+# Core
+pandas
+polars
+numpy
+scipy
+
+# Data
+yfinance
+evds
+pandas_datareader
+requests
+python-dotenv
+
+# Analysis & Modeling
+statsmodels
+scikit-learn
+hmmlearn
+arch
+xgboost
+lightgbm
+pyyaml
+
+# Visualization
+matplotlib
+seaborn
+plotly
+
+# Infrastructure
+typer
+tqdm
+pytest
+black
+isort
+flake8

@@ -1,0 +1,25 @@
+project_name: try-regime-analysis
+data:
+  start_date: "2010-01-01"
+  end_date: null
+  symbols:
+    fx: "USDTRY=X"
+    dxy: "DX-Y.NYB"
+    gold: "GC=F"
+    oil: "CL=F"
+  evds_series:
+    reserves: "TP.AB.A02"  # Gross Reserves
+    net_reserves: "TP.AB.A04" # Net Foreign Assets
+    policy_rate: "TP.DK.USD.A.YTL" # Example, need correct EVDS codes
+    cpi: "TP.FG.J0"
+  fred_series:
+    vix: "VIXCLS"
+    em_fx: "DTWEXEMEGS"
+
+modeling:
+  hmm:
+    n_components: 3
+    covariance_type: "full"
+  intervention:
+    rolling_vol_window: 21
+    reserves_window: 5

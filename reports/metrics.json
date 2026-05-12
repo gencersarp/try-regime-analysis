@@ -1,0 +1,25 @@
+{
+    "backtest": {
+        "Total Return": "-78.75%",
+        "Sharpe Ratio": -1.27,
+        "Max Drawdown": "-85.15%",
+        "Win Rate": "24.83%"
+    },
+    "risk": {
+        "Regime 0.0": {
+            "Daily VaR (95%)": "-1.03%",
+            "Daily ES (95%)": "-1.46%",
+            "Volatility": "8.38%"
+        },
+        "Regime 2.0": {
+            "Daily VaR (95%)": "-1.08%",
+            "Daily ES (95%)": "-1.68%",
+            "Volatility": "11.17%"
+        },
+        "Regime 1.0": {
+            "Daily VaR (95%)": "-0.35%",
+            "Daily ES (95%)": "-1.03%",
+            "Volatility": "6.10%"
+        }
+    }
+}

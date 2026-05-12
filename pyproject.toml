@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "try-regime-analysis"
+version = "0.1.0"
+description = "Research project investigating Turkish Lira FX regimes and interventions."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pandas",
+    "numpy",
+    "scipy",
+    "yfinance",
+    "evds",
+    "pandas_datareader",
+    "requests",
+    "python-dotenv",
+    "statsmodels",
+    "scikit-learn",
+    "hmmlearn",
+    "arch",
+    "xgboost",
+    "lightgbm",
+    "pyyaml",
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "typer",
+    "tqdm"
+]
+
+[project.scripts]
+try-analysis = "src.main:app"
