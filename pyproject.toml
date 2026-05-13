@@ -1,35 +1,79 @@
-[build-system]
-requires = ["setuptools>=42", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "try-regime-analysis"
-version = "0.1.0"
-description = "Research project investigating Turkish Lira FX regimes and interventions."
+version = "1.0.0"
+description = "Industrial-grade Turkish Lira (TRY) FX regime analysis and carry trade research framework."
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "Gencer Sarp Mert" }
+]
 dependencies = [
-    "pandas",
-    "numpy",
-    "scipy",
-    "yfinance",
-    "evds",
-    "pandas_datareader",
-    "requests",
-    "python-dotenv",
-    "statsmodels",
-    "scikit-learn",
-    "hmmlearn",
-    "arch",
-    "xgboost",
-    "lightgbm",
-    "pyyaml",
-    "matplotlib",
-    "seaborn",
-    "plotly",
-    "typer",
-    "tqdm"
+    "pandas>=2.0.0",
+    "numpy>=1.24.0",
+    "scipy>=1.10.0",
+    "yfinance>=0.2.0",
+    "evds>=0.2.0",
+    "pandas-datareader>=0.10.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
+    "statsmodels>=0.14.0",
+    "scikit-learn>=1.3.0",
+    "hmmlearn>=0.3.0",
+    "arch>=6.0.0",
+    "xgboost>=2.0.0",
+    "lightgbm>=4.1.0",
+    "pyyaml>=6.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+    "plotly>=5.15.0",
+    "typer>=0.9.0",
+    "tqdm>=4.66.0",
+    "pydantic>=2.0.0",
+    "pyarrow>=12.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "pre-commit>=3.4.0",
+    "nbstripout>=0.6.1",
+    "detect-secrets>=1.4.0"
+]
+test = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0"
+]
+notebook = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.25.0"
 ]
 
 [project.scripts]
 try-analysis = "src.main:app"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "B", "UP"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src --cov-report=term-missing"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this software in your research, please cite it as below."
+authors:
+- family-names: "Mert"
+  given-names: "Gencer Sarp"
+title: "try-regime-analysis: Industrial-grade TRY FX Regime Analysis"
+version: 1.0.0
+date-released: 2026-05-11
+url: "https://github.com/gencersarp/try-regime-analysis"
