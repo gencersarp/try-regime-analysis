@@ -1,25 +1,86 @@
 project_name: try-regime-analysis
 data:
-  start_date: "2010-01-01"
+  start_date: "2000-01-01" # Extended to cover 2005 redenomination
   end_date: null
   symbols:
     fx: "USDTRY=X"
     dxy: "DX-Y.NYB"
     gold: "GC=F"
     oil: "CL=F"
+  peers:
+    - "USDZAR=X"
+    - "USDMXN=X"
+    - "USDBRL=X"
+    - "USDHUF=X"
   evds_series:
-    reserves: "TP.AB.A02"  # Gross Reserves
-    net_reserves: "TP.AB.A04" # Net Foreign Assets
-    policy_rate: "TP.DK.USD.A.YTL" # Example, need correct EVDS codes
+    reserves: "TP.AB.A02"
+    net_reserves: "TP.AB.A04"
+    policy_rate: "TP.AP05"
     cpi: "TP.FG.J0"
+    current_account: "TP.ODEMG01.TOPLAM"
+    cpi_exp_12m: "TP.BE.S003.H01" # CBRT Survey of Expectations - 12m ahead CPI
+    swaps_total: "TP.AB.A06" # Proxy for swap obligations
   fred_series:
     vix: "VIXCLS"
     em_fx: "DTWEXEMEGS"
+    cds_turkey: "TURKEYCDS5Y" # Example FRED code for CDS
+  publication_lags:
+    fx: 0
+    dxy: 0
+    gold: 0
+    oil: 0
+    peers: 0
+    reserves: 7
+    net_reserves: 7
+    policy_rate: 0
+    cpi: 10
+    current_account: 45
+    cpi_exp_12m: 15
+    swaps_total: 7
+    vix: 1
+    em_fx: 1
+    cds_turkey: 1
+    reer_bis: 30
+
+dashboard:
+  gauges:
+    reer:
+      name: "REER Overvaluation"
+      description: "BIS broad REER z-score vs 120m mean. High values indicate 'fuel' for devaluation."
+      is_leading: false # Long-term anchor
+    reserves:
+      name: "Net Reserves ex-Swaps"
+      description: "CBRT Net Foreign Assets minus Swap obligations. The primary liquidity gauge."
+      is_leading: true
+    swap_rate:
+      name: "Offshore Swap Spread"
+      description: "1W offshore swap rate spread over CBRT funding. High spreads indicate liquidity squeeze."
+      is_leading: false # Coincident/Lagging
+    cds:
+      name: "5Y CDS"
+      description: "Turkey 5-year Credit Default Swap level and trend."
+      is_leading: false
+    realized_vol:
+      name: "Realized Volatility"
+      description: "21-day annualized USDTRY vol z-score."
+      is_leading: false
+    real_rate:
+      name: "Real Policy Rate"
+      description: "CBRT 1-week repo minus 12m CPI expectations."
+      is_leading: false
+    vol_premium:
+      name: "Vol Risk Premium"
+      description: "1m Implied Vol minus 21d Realized Vol. Negative VRP precedes panics."
+      is_leading: true
 
 modeling:
   hmm:
     n_components: 3
     covariance_type: "full"
+    algorithm: "viterbi"
   intervention:
     rolling_vol_window: 21
     reserves_window: 5
+  hazard:
+    observation_window: 63 # 3 months of lookback for transition features
+    threshold: 0.8
